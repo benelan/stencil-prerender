@@ -1,3 +1,36 @@
+# Stencil Prerender
+
+I've been trying to get the [`hydrate`](https://stenciljs.com/docs/hydrate-app) bundle working and have a few issues:
+
+1. Assets are not loading
+2. The components flash on initial load
+
+I'm wondering if I'm doing something wrong, or if you have any suggestions to fix the above issues. The prerendering happens in `server.js`
+
+## Repro Steps
+
+1. Run:
+    ```bash
+    git clone git@github.com:benelan/stencil-prerender.git
+    cd stencil-prerender
+    npm i
+    npm run dev
+    ```
+2. Open the app in the browser
+3. Click on the big blue "Calcite" link
+4. Notice that components flash when they load and that there is a banana icon next to the header. The components flashing when dynamically importing on the client side makes sense, so that's not an issue
+5. Shutdown the dev server
+6. run `npm run server`
+7. Open the app in the browser
+8. Click on the big blue "Calcite" link
+9. Notice that the components flash on initial load and there is no banana icon. You can see the flash if you refresh the `/calcite` route as well. However, if you click back and forth between the "Home" and "Calcite" blue links it works great after the initial load.
+
+
+It seems like prerendering and hydrating the components should prevent this flash. Maybe the hydration is causing a React VDOM diff and a rerender? Do you have any working examples for using the `hydrate` bundle that I can use as reference?
+
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -15,7 +15,7 @@ app.prepare().then(() => {
 
   server.all("*", async (req, res) => {
     const html = await app.renderToHTML(req, res, req.path, req.query);
-    const renderedHtml = await renderToString(html, {beforeHydrate: true});
+    const renderedHtml = await renderToString(html);
     return res.send(renderedHtml.html);
   });
 
